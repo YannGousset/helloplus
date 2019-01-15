@@ -9,7 +9,6 @@ L'application dit "Hello nom prenom !"
 # Exemple
 
 ![GitHub Logo](/HelloPlusExemple.JPG)
-Format: ![Alt Text](url)
 
 # Auteur
 Auteur : GOUSSET Yann
