@@ -8,7 +8,7 @@ L'application dit "Hello nom prenom !"
 
 # Exemple
 
-![GitHub Logo](/images/logo.png)
+![GitHub Logo](/HelloPlusExemple.JPG)
 Format: ![Alt Text](url)
 
 # Auteur
