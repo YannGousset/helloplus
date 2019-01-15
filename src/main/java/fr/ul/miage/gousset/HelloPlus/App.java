@@ -44,7 +44,7 @@ public class App
         String filename = null;
         
         Options options = new Options();
-        Option input = new Option("i", "input", true, "monfichier.csv");
+        Option input = new Option("i", "input", true, "names.csv");
         input.setRequired(true);
         options.addOption(input);
         
