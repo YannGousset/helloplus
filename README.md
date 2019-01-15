@@ -6,6 +6,11 @@ C'est une application permettant de lire un fichier csv.
 Le fichier csv doit être un fichier avec des noms et prénoms
 L'application dit "Hello nom prenom !"
 
+# Exemple
+
+![GitHub Logo](/images/logo.png)
+Format: ![Alt Text](url)
+
 # Auteur
 Auteur : GOUSSET Yann
 
