@@ -17,28 +17,50 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 /**
- * Hello world!
+ * Application Hello Plus!
  *
  */
 public class App 
 {
-	
+	/**
+	 * Attribut privé static final permettant de Logger l'application
+	 */
 	private static final Logger LOG = Logger.getLogger(App.class.getName());
 	
+	/**
+	 * Attribut privé de type String représentant le nom du fichier
+	 */
 	private String filename;
 	
+	
+	/**
+	 * Constructeur de la classe App
+	 * @param filename : type String représentant le nom du fichier
+	 */
 	public App(String filename) {
 		setFilename(filename);
 	}
 	
+	/**
+	 * Getter du nom du fichier
+	 * @return un String qui représente le nom du fichier
+	 */
 	public String getFilename() {
 		return filename;
 	}
 	
+	/**
+	 * Setter du nom du fichier
+	 * @param filename qui représente le nom du fichier
+	 */
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
 	
+	/**
+	 * Méthode main
+	 * @param args qui représente les arguments en entrée de l'application
+	 */
     public static void main( String[] args )
     {
         String filename = null;
@@ -76,6 +98,11 @@ public class App
         }
     }
     
+    /**
+     * Méthode permettant de faire le parser du csv
+     * @return le csvParser
+     * @throws IOException
+     */
     public CSVParser buildCSVParser() throws IOException{
     	CSVParser res = null;
     	Reader in;
