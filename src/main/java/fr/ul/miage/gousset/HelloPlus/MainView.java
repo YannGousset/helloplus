@@ -3,7 +3,6 @@ package fr.ul.miage.gousset.HelloPlus;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.apache.commons.cli.CommandLine;
@@ -17,12 +16,16 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-/**
- * Application Hello Plus!
- *
- */
-public class App 
-{
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+public class MainView extends Application {
+
 	/**
 	 * Attribut privé static final permettant de Logger l'application
 	 */
@@ -33,52 +36,45 @@ public class App
 	 */
 	private String filename;
 	
-	public static ArrayList<String> _MaListeNom = new ArrayList<String>();
-	public static ArrayList<String> _MaListePrenom = new ArrayList<String>();
-	
 	/**
-	 * Constructeur de la classe App
-	 * @param filename : type String représentant le nom du fichier
+	 * 
 	 */
-	public App(String filename) {
-		setFilename(filename);
+	@Override
+	public void start(Stage primaryStage) {
+		BorderPane blayout = new BorderPane();
+		TextArea ta = new TextArea();
+		Button btn = new Button("Dire bonjour");
+		btn.setOnAction((e) -> {this.click(ta);;});
+		blayout.setBottom(btn);
+		blayout.setCenter(ta);
+		BorderPane.setAlignment(btn, Pos.BOTTOM_CENTER);
+		Scene scene = new Scene(blayout, 500, 300);
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Application HelloWorld");
+		primaryStage.show();
 	}
-	
+
 	/**
-	 * Getter du nom du fichier
-	 * @return un String qui représente le nom du fichier
+	 * Méthode de lancement de l'application
+	 * @param args
 	 */
-	public String getFilename() {
-		return filename;
-	}
-	
-	/**
-	 * Setter du nom du fichier
-	 * @param filename qui représente le nom du fichier
-	 */
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-	
-	/**
-	 * Méthode main
-	 * @param args qui représente les arguments en entrée de l'application
-	 */
-    public static void main( String[] args )
-    {
-        String filename = null;
+	public static void main(String[] args) {
+		launch(args);
+		String filename = null;
         
         Options options = new Options();
         Option input = new Option("i", "input", true, "names.csv");
         input.setRequired(true);
         options.addOption(input);
-        
         CommandLineParser parser = new DefaultParser();
+      
         try {
         	CommandLine line = parser.parse(options, args);
+        	
         	if(line.hasOption("i")) {
         		filename = line.getOptionValue("i");
         	}
+        	
         }
         catch(ParseException exp) {
         	LOG.severe("Erreur dans la ligne de commande");
@@ -87,26 +83,33 @@ public class App
             System.exit(1);
         }
         
-        
-        App app = new App(filename);
-        try {
-        	CSVParser p = app.buildCSVParser();
+    }
+	
+	/**
+	 * Méthode de click du bouton de la GUI
+	 * @param ta
+	 */
+	public void click(TextArea ta) {
+		filename = "names.csv";
+		try {
+        	CSVParser p = this.buildCSVParser();
         	for(CSVRecord r: p) {
-        		_MaListeNom.add(r.get(0));
-        		_MaListePrenom.add(r.get(1));
+        		ta.appendText("Hello " + r.get(0) + " " + r.get(1) + " !\n");
         		
         	}
         }catch (IOException e) {
         	LOG.severe("Erreur de lecture dans le fichier CSV");
         }
-    }
-    
-    /**
-     * Méthode permettant de faire le parser du csv
-     * @return le csvParser
-     * @throws IOException
-     */
-    public CSVParser buildCSVParser() throws IOException{
+	}
+	
+	
+	/**
+	 * Méthode de parse pour la fichier CSV
+	 * @return
+	 * @throws IOException
+	 */
+	public CSVParser buildCSVParser() throws IOException{
+		
     	CSVParser res = null;
     	Reader in;
     	in = new FileReader(filename);
@@ -114,4 +117,5 @@ public class App
     	res = new CSVParser(in, csvf);
     	return res;
     }
+	
 }
